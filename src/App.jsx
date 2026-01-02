@@ -1,26 +1,25 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-
-import { images } from "./database/images";
 import Home from "./components/Home";
 import Task from "./components/Task";
+import { images } from "./database/images";
+import { BrowserContext } from "./context/BrowserContext";
 
 const App = () => {
-  const index = Math.floor(Math.random() * images.length);
-  const bgImage = images[index].image;
-
-  const username = localStorage.getItem("username");
+  const { name } = useContext(BrowserContext); // ✅ FIX
+  const bgImage =
+    images[Math.floor(Math.random() * images.length)].image;
 
   return (
     <div
-      className="w-[100vw] h-[100vh] bg-cover bg-center bg-no-repeat"
+      className="min-h-screen w-full bg-cover bg-center bg-no-repeat"
       style={{ backgroundImage: `url(${bgImage})` }}
     >
       <Routes>
         <Route path="/" element={<Home />} />
         <Route
           path="/task"
-          element={username ? <Task /> : <Navigate to="/" />}
+          element={name ? <Task /> : <Navigate to="/" />}
         />
       </Routes>
     </div>

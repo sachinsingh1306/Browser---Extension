@@ -138,7 +138,7 @@ const Task = () => {
 
   const goHome = () => {
     localStorage.removeItem("username");
-    navigate("#/");
+    navigate("/");
   };
 
   const handleYouTubeSearch = (e) => {
